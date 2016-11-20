@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="" ng-app="app">
+<head>
+	<meta charset="utf-8"> 
+	<title>Todo List</title>
+	<!-- Using Bootstrap CSS-->
+	<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+</head>
+	<body>
+		<!-- Main Controller -->
+		<div ng-controller="HomeController as home">
+			<!-- Main Heading -->
+			<h1 class="text-center">Very Simple Todo App</h1>
+			<br>
+				<!-- Input Box Form -->
+				<div class="col-sm-4 offset-sm-1">
+					<div class="panel panel-info">
+						<!-- Panel Heading -->
+						<div class="panel-heading">Add Todo Item</div>
+						<!-- Panel Body -->
+						<div class="panel-body">
+							<label>Text</label>
+							<input class="form-control" ng-model="home.newTodo">
+							<br>
+							<label>Priority</label>
+							<select ng-init="selected = 0"ng-model="home.newClass" class="form-control">
+								<option value="2">High Priority</option>
+								<option value="1">Medium Priority</option>
+								<option value="" selected>Low Priority</option>
+							</select>
+							<br>
+						</div>
+						<!-- Panel Footer -->
+						<div class="panel-footer">
+						<button ng-click="home.addTodo()" type="button" class="btn btn-primary">Add Todo</button>
+						</div>
+					</div>	
+				</div>
+				<!-- Side Container for Buttons and Outputs  -->
+				<div class="col-sm-8">
+					<!-- Button Group -->
+					<div class="btn-group" role="group">	
+						<button type="button" class="btn btn-primary" ng-click="home.highTodo()">Order By Highest Priority</button>
+						<button type="button" class="btn btn-primary" ng-click="home.lowTodo()">Order By Lowest Priority</button>
+						<button type="button" class="btn btn-primary" ng-click="home.sortTodo()">Order Alphabetically</button>
+					</div>
+					<!-- Output of Todo Text -->
+					<ul class="list-group">
+						<li class="list-group-item" ng-repeat="todo in home.todos | orderBy: home.alphabetSort track by $index" ng-class="todo.color"> {{todo.text}} </li>
+					</ul>
+				</div>
+		</div>
+
+		<!-- Angular.js -->
+		<script src="bower_components/angular/angular.js"></script>
+		<!-- jQuery -->
+		<script src="//code.jquery.com/jquery.js"></script>
+		<!-- Bootstrap JavaScript -->
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+		<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+		<script src="app/app.module.js"></script>
+		<script src="app/Home/home.controller.js"></script>
+	</body>
+</html>
